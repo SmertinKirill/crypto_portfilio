@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.db import models
+
 from .currency import CURRENCY
 
 User = get_user_model()

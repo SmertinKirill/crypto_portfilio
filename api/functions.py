@@ -1,10 +1,14 @@
 import json
+import os
 from decimal import Decimal
 
 from django.db.models import Sum
+from dotenv import load_dotenv
 from requests import Session
 
 from portfolio.models import Buy, Sell
+
+load_dotenv()
 
 
 def get_price(tag):
@@ -16,7 +20,7 @@ def get_price(tag):
     }
     headers = {
         'Accepts': 'application/json',
-        'X-CMC_PRO_API_KEY': 'f708d7d2-1478-4a99-8e04-f26db43d9209'
+        'X-CMC_PRO_API_KEY': os.getenv('API_KEY')
     }
     session = Session()
     session.headers.update(headers)
