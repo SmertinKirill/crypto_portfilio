@@ -1,10 +1,15 @@
+# import os
+# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')
+# import django
+# django.setup()
+
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.db import models
-
 from .currency import CURRENCY
 
 User = get_user_model()
+
 
 
 class Portfolio(models.Model):
@@ -24,6 +29,14 @@ class Portfolio(models.Model):
 
     def __str__(self):
         return "%s %s" % (self.user.username, self.currency)
+
+
+class Crypto(models.Model):
+    tag = models.CharField(max_length=10, unique=True)
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.nam
 
 
 class Buy(models.Model):
