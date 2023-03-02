@@ -45,7 +45,7 @@ def get_total(user_id, currency):
         global total
         total = sum_buy - sum_sell
         holdings = total * Decimal(current_price)
-        return [f'{total} {currency}', f'{round(holdings, 3)}$']
+        return [f'{round(total, 3)} {currency}', f'{round(holdings, 3)}$']
     return '—'
 
 
@@ -64,14 +64,16 @@ def get_profit(user_id, currency):
             ) * 100, 2
         )
     else:
+        sum_count = amount_buy.aggregate(Sum('count'))['count__sum']
         sum_amount_sell = amount_sell.aggregate(Sum('amount'))['amount__sum']
+        average_purchase = sum_amount_buy / sum_count
+        total_money = total * Decimal(current_price)
+        profit_money = total_money - (sum_amount_buy - sum_amount_sell)
         profit = round(
-            (
-                (total * Decimal(current_price) - Decimal(sum_sell))
-                / (sum_amount_sell - sum_amount_buy) - 1
-            ) * 100, 2
+            (profit_money / average_purchase) * 100, 2
         )
-
+        print(profit)
+    profit_money = round(profit_money, 2)
     if profit >= 0:
-        return f'+{profit}%'
-    return f'{profit}%'
+        return f'+{profit_money}$ | +{profit}%'
+    return f'-{profit_money}$ | -{profit}%'

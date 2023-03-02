@@ -1,8 +1,3 @@
-# import os
-# os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')
-# import django
-# django.setup()
-
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -11,12 +6,19 @@ from .currency import CURRENCY
 User = get_user_model()
 
 
+class Crypto(models.Model):
+    tag = models.CharField(max_length=10, unique=True)
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.tag
+
 
 class Portfolio(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='portfolios')
-    currency = models.CharField(
-        max_length=12, choices=CURRENCY, verbose_name="Криптовалюта"
+    currency = models.ForeignKey(
+        Crypto, on_delete=models.PROTECT, related_name='portfolios'
     )
 
     class Meta:
@@ -30,13 +32,6 @@ class Portfolio(models.Model):
     def __str__(self):
         return "%s %s" % (self.user.username, self.currency)
 
-
-class Crypto(models.Model):
-    tag = models.CharField(max_length=10, unique=True)
-    name = models.CharField(max_length=50)
-
-    def __str__(self):
-        return self.nam
 
 
 class Buy(models.Model):
@@ -55,8 +50,8 @@ class Buy(models.Model):
         max_digits=20,
         decimal_places=2,
         validators=[validate_interval])
-    currency = models.CharField(
-        max_length=12, choices=CURRENCY, verbose_name="Криптовалюта"
+    currency = models.ForeignKey(
+        Crypto, on_delete=models.PROTECT, related_name='buyes'
     )
     purchase_price = models.DecimalField(
         max_digits=20,
@@ -95,8 +90,8 @@ class Sell(models.Model):
         max_digits=20,
         decimal_places=2,
         validators=[validate_interval])
-    currency = models.CharField(
-        max_length=12, choices=CURRENCY, verbose_name="Криптовалюта"
+    currency = models.ForeignKey(
+        Crypto, on_delete=models.PROTECT, related_name='sells'
     )
     amount = models.DecimalField(
         max_digits=20,
