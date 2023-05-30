@@ -32,7 +32,6 @@ class Portfolio(models.Model):
         return "%s %s" % (self.user.username, self.currency)
 
 
-
 class Buy(models.Model):
     def validate_interval(value):
         if value <= 0.0:

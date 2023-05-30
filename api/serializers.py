@@ -18,14 +18,14 @@ class PortfolioSerializers(serializers.ModelSerializer):
         fields = ('currency', 'current_price', 'total', 'profit')
 
     def get_current_price(self, obj):
-        return f'{get_price(str(obj.currency))}$'
+        current_price = get_price(str(obj.currency))
+        return f'{current_price}$'
 
     def get_total(self, obj):
         return get_total(obj.user_id, obj.currency)
 
     def get_profit(self, obj):
         return get_profit(obj.user_id, obj.currency)
-
 
 
 class BuySerializers(serializers.ModelSerializer):
@@ -55,6 +55,7 @@ class SellSerializers(serializers.ModelSerializer):
         queryset=Crypto.objects.all(),
         slug_field='tag'
     )
+
     class Meta:
         model = Sell
         fields = '__all__'

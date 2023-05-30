@@ -12,7 +12,7 @@ class Command(BaseCommand):
     """
     def handle(self, *args, **options):
 
-        p = 'static/data/'
+        p = 'data/'
 
         with contextlib.ExitStack() as stack:
             cryptoes = csv.DictReader(
