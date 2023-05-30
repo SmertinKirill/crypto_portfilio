@@ -20,7 +20,7 @@ Crypto Portfolio - это проект, который позволяет пол
 ![Python](https://img.shields.io/badge/Python-3.7.16-3776AB?logo=python)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-13-336791?logo=postgresql)
 ![Docker](https://img.shields.io/badge/Docker-20.10.7-2496ED?logo=docker)
-- ![CoinMarketCap](https://img.shields.io/badge/CoinMarketCap-API-FF6F00?logo=coinmarketcap)
+![CoinMarketCap](https://img.shields.io/badge/CoinMarketCap-API-FF6F00?logo=coinmarketcap)
 
 ### Порядок установки
 1. В папке инфра создайте файл .env
