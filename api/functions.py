@@ -62,7 +62,7 @@ def get_total(user_id, currency):
 
 def get_profit(user_id, currency):
     """
-    Расчитывает профит 
+    Расчитывает профит
     """
     amount_buy = Buy.objects.filter(user_id=user_id, currency=currency)
     amount_sell = Sell.objects.filter(user_id=user_id, currency=currency)

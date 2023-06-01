@@ -35,10 +35,10 @@ SECRET_KEY = секретный ключ
 API_KEY = ключ для работы с API CoinMarketCap(https://pro.coinmarketcap.com/account)
 ```
 2. В папке infra выполните команду ```docker-compose up -d --buld```
-3. Выполните миграции ```docker-compose exec backend python manage.py migrate```
-4. Создайте суперпользователя ```docker-compose exec backend python manage.py createsuperuser```
-5. Соберите статику ```docker-compose exec backend python manage.py collectstatic --no-input```
-6. Заполните базу криптовалют ```docker-compose exec backend python manage.py filldb```
+3. Выполните миграции ```docker-compose exec web python manage.py migrate```
+4. Создайте суперпользователя ```docker-compose exec web python manage.py createsuperuser```
+5. Соберите статику ```docker-compose exec web python manage.py collectstatic --no-input```
+6. Заполните базу криптовалют ```docker-compose exec web python manage.py filldb```
 
 ## Разработчик
 - [SmertinKirill](https://github.com/SmertinKirill)
